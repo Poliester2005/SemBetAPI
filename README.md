@@ -150,6 +150,14 @@ sem-bet-api/
 
 ---
 
+## 🛡️ Análise Estática de Segurança com Semgrep
+
+Realizamos uma varredura completa do código-fonte utilizando a ferramenta **Semgrep** com o conjunto de regras **OWASP Top 10** para identificar possíveis vulnerabilidades comuns, como injeção de SQL, Cross-Site Scripting (XSS), exposição de senhas em texto plano, entre outras falhas de segurança.
+
+Após a execução da análise estática, **não foram encontradas vulnerabilidades ou falhas relevantes** no código, indicando que as boas práticas de segurança e validação estão sendo corretamente aplicadas no projeto.
+
+---
+
 ## 📦 Licença
 
 Este projeto é livre para fins educacionais.
