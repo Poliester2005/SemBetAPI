@@ -158,6 +158,33 @@ Após a execução da análise estática, **não foram encontradas vulnerabilida
 
 ---
 
+## 🎯 Design Ético
+
+Nosso sistema adota uma abordagem ética rigorosa no desenvolvimento e uso de inteligência artificial, respeitando os direitos individuais, a privacidade dos usuários e garantindo transparência nas decisões automáticas.
+
+### Decisões Respeitando Direitos Individuais e Privacidade
+
+* Garantimos o uso responsável dos dados pessoais, limitando a exposição apenas ao necessário através de DTOs e controle de acesso baseado em perfis.
+* Dados sensíveis são protegidos por criptografia e nunca expostos diretamente pelas APIs.
+* Consentimento explícito dos usuários é coletado e registrado para uso dos dados, assegurando conformidade com normas de privacidade.
+
+### Auditoria Contínua dos Modelos de IA para Avaliação Ética
+
+* As decisões tomadas pelos modelos de IA são registradas em logs com informações detalhadas para posterior análise e auditoria.
+* Revisões periódicas são realizadas nos datasets e no desempenho dos modelos para garantir ausência de vieses e manter a integridade ética do sistema.
+* Utilizamos ferramentas de monitoramento para identificar possíveis comportamentos anômalos ou falhas nas previsões.
+
+### Criação de Diretrizes Éticas para Desenvolvimento de IA
+
+* Mantemos documentadas políticas internas que guiam o desenvolvimento responsável da IA, incluindo:
+
+  * Transparência e explicabilidade das decisões (XAI)
+  * Mitigação e correção de vieses
+  * Proteção dos dados e privacidade dos usuários
+  * Avaliação constante do impacto social e ético das soluções de IA
+
+---
+
 ## 📦 Licença
 
 Este projeto é livre para fins educacionais.
