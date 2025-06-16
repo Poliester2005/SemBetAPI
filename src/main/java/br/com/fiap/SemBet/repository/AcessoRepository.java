@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface AcessoRepository extends JpaRepository<Acesso, Long> {
-    // Método para filtrar por tipo de ação (campo acao)
     List<Acesso> findByAcaoContainingIgnoreCase(String acao);
 }

@@ -22,6 +22,17 @@ public class Usuario {
 
     private LocalDateTime criadoEm = LocalDateTime.now();
 
+    private String telefone;
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Acesso> acessos;
@@ -29,13 +40,14 @@ public class Usuario {
     // Construtor padrão (obrigatório pelo JPA)
     public Usuario() {}
 
-    public Usuario(String nome, String email, String senha, String perfil, List<Acesso> acessos) {
+    public Usuario(String nome, String email, String senha, String perfil, List<Acesso> acessos, String telefone) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.perfil = perfil;
         this.acessos = acessos;
         this.criadoEm = LocalDateTime.now();
+        this.telefone = telefone;
     }
 
     // Getters e Setters
