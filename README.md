@@ -123,16 +123,6 @@ spring.datasource.url=jdbc:h2:mem:testdb
 
 ---
 
-## 👨‍💻 Autores
-
-| Nome                    | RM     |
-| ----------------------- | ------ |
-| Eduardo Pielich Sanchez | 99767  |
-| Débora da Silva Amaral  | 550412 |
-| Lívia Namba Seraphim    | 97819  |
-
----
-
 ## 📁 Estrutura
 
 ```
@@ -182,6 +172,16 @@ Nosso sistema adota uma abordagem ética rigorosa no desenvolvimento e uso de in
   * Mitigação e correção de vieses
   * Proteção dos dados e privacidade dos usuários
   * Avaliação constante do impacto social e ético das soluções de IA
+
+---
+
+## 👨‍💻 Autores
+
+| Nome                    | RM     |
+| ----------------------- | ------ |
+| Eduardo Pielich Sanchez | 99767  |
+| Débora da Silva Amaral  | 550412 |
+| Lívia Namba Seraphim    | 97819  |
 
 ---
 
