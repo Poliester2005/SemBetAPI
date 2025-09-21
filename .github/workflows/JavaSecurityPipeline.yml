@@ -39,7 +39,7 @@ jobs:
         run: mvn com.github.spotbugs:spotbugs-maven-plugin:4.8.6.2:spotbugs
 
       - name: Upload SpotBugs Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: SpotBugs-Report
           path: |
@@ -61,7 +61,7 @@ jobs:
         run: ./dc/dependency-check/bin/dependency-check.sh --project "MeuApp" --scan . --format "ALL" --out ./dc-report
 
       - name: Upload Dependency-Check Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Dependency-Check-Report
           path: ./dc-report/*
@@ -93,7 +93,7 @@ jobs:
             -J zap-report.json
 
       - name: Upload ZAP Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ZAP-Report
           path: |
