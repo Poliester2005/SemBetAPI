@@ -35,8 +35,11 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: Ensure SpotBugs output folder exists
+        run: mkdir -p target/site
+
       - name: Run SpotBugs (SAST)
-        run: mvn com.github.spotbugs:spotbugs-maven-plugin:4.8.6.2:spotbugs
+        run: mvn com.github.spotbugs:spotbugs-maven-plugin:4.8.6.2:spotbugs -Dspotbugs.reportFormat=html
 
       - name: Upload SpotBugs Report
         uses: actions/upload-artifact@v4
@@ -51,6 +54,9 @@ jobs:
     needs: build-test
     steps:
       - uses: actions/checkout@v3
+
+      - name: Ensure Dependency-Check report folder exists
+        run: mkdir -p ./dc-report
 
       - name: Download Dependency-Check
         run: |
