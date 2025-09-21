@@ -2,9 +2,10 @@ package br.com.fiap.SemBet.controller;
 
 import br.com.fiap.SemBet.dto.LoginRequest;
 import br.com.fiap.SemBet.dto.LoginResponse;
+import br.com.fiap.SemBet.model.Usuario;
 import br.com.fiap.SemBet.repository.UsuarioRepository;
 import br.com.fiap.SemBet.security.TokenService;
-import br.com.fiap.SemBet.service.SmsService;
+import br.com.fiap.SemBet.service.SmsService; // serviço genérico de OTP (SMS, email, console...)
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -21,40 +22,36 @@ public class AuthController {
     private final UsuarioRepository repository;
     private final TokenService tokenService;
     private final PasswordEncoder passwordEncoder;
-    private final SmsService smsService;
+    private final SmsService smsService; // Troquei para serviço genérico
 
-    // Cache simples para OTPs
     private final Map<String, String> otpCache = new ConcurrentHashMap<>();
     private final SecureRandom random = new SecureRandom();
 
-    public AuthController(UsuarioRepository repository, TokenService tokenService,
-                          PasswordEncoder passwordEncoder, SmsService smsService) {
+    public AuthController(UsuarioRepository repository,
+                          TokenService tokenService,
+                          PasswordEncoder passwordEncoder,
+                          SmsService smsService) {
         this.repository = repository;
         this.tokenService = tokenService;
         this.passwordEncoder = passwordEncoder;
         this.smsService = smsService;
     }
 
-    // Passo 1: Login email + senha -> gerar e enviar OTP SMS
+    // Passo 1: Login email + senha -> gerar e enviar OTP
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest login) {
-        Optional<?> usuarioOpt = repository.findByEmail(login.getEmail());
+        Optional<Usuario> usuarioOpt = repository.findByEmail(login.getEmail());
 
         if (usuarioOpt.isPresent()) {
-            var usuario = usuarioOpt.get();
+            Usuario usuario = usuarioOpt.get();
 
-            // Valida senha
-            if (passwordEncoder.matches(login.getSenha(), ((br.com.fiap.SemBet.model.Usuario) usuario).getSenha())) {
-
-                // Gera OTP de 6 dígitos
+            if (passwordEncoder.matches(login.getSenha(), usuario.getSenha())) {
                 String otp = String.format("%06d", random.nextInt(1_000_000));
-                otpCache.put(((br.com.fiap.SemBet.model.Usuario) usuario).getEmail(), otp);
+                otpCache.put(usuario.getEmail(), otp);
 
-                // Envia SMS
-                String telefone = ((br.com.fiap.SemBet.model.Usuario) usuario).getTelefone();
-                smsService.sendSms(telefone, "Seu código de verificação é: " + otp);
+                smsService.sendOtp(usuario.getEmail(), otp);
 
-                return ResponseEntity.ok("Código OTP enviado via SMS");
+                return ResponseEntity.ok("Código OTP enviado");
             }
         }
 

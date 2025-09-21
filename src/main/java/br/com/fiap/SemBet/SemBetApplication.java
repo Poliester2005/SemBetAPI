@@ -15,34 +15,4 @@ public class SemBetApplication {
     public static void main(String[] args) {
         SpringApplication.run(SemBetApplication.class, args);
     }
-
-
-    @Bean
-    public CommandLineRunner initDatabase(UsuarioRepository usuarioRepository) {
-        return args -> {
-            usuarioRepository.save(new Usuario(
-                    "Maria",
-                    "maria@email.com",
-                    "senha789",
-                    "USER",
-                    Collections.emptyList()  // sem acessos iniciais
-            ));
-
-            usuarioRepository.save(new Usuario(
-                    "João",
-                    "joao@email.com",
-                    "senha123",
-                    "ADMIN",
-                    Collections.emptyList()
-            ));
-
-            usuarioRepository.save(new Usuario(
-                    "Ana",
-                    "ana@email.com",
-                    "senha456",
-                    "USER",
-                    Collections.emptyList()
-            ));
-        };
-    }
 }

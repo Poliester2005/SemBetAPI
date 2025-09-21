@@ -1,5 +1,6 @@
 package br.com.fiap.SemBet.service;
 
+import br.com.fiap.SemBet.enums.TipoAcaoSuspeita;
 import br.com.fiap.SemBet.exception.ResourceNotFoundException;
 import br.com.fiap.SemBet.model.Acesso;
 import br.com.fiap.SemBet.repository.AcessoRepository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AcessoService {
@@ -19,13 +21,13 @@ public class AcessoService {
         return repository.findAll();
     }
 
-    public Acesso buscarPorId(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Acesso não encontrado com id " + id));
+    public Optional<Acesso> buscarPorId(Long id) {
+        return repository.findById(id);
     }
 
-    public List<Acesso> buscarPorAcao(String acao) {
-        return repository.findByAcaoContainingIgnoreCase(acao);
+
+    public List<Acesso> buscarPorAcao(TipoAcaoSuspeita acao) {
+        return repository.findByAcao(acao);
     }
 
     public Acesso salvar(Acesso acesso) {
@@ -33,8 +35,16 @@ public class AcessoService {
         return repository.save(acesso);
     }
 
-    public void deletar(Long id) {
-        Acesso acesso = buscarPorId(id); // garante que existe ou lança exceção
-        repository.delete(acesso);
+    public boolean deletar(Long id) {
+        Optional<Acesso> acesso = buscarPorId(id);
+
+        if (acesso.isEmpty()) {
+            return false; // sinaliza que não achou
+        }
+
+        repository.delete(acesso.get());
+        return true;
     }
+
+
 }

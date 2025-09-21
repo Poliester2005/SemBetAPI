@@ -1,5 +1,6 @@
 package br.com.fiap.SemBet.model;
 
+import br.com.fiap.SemBet.enums.TipoAcaoSuspeita;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -18,7 +19,8 @@ public class Acesso {
 
     private String ip;
 
-    private String acao;
+    @Enumerated(EnumType.STRING)
+    private TipoAcaoSuspeita acao;
 
     @Column(nullable = false)
     private LocalDateTime horario = LocalDateTime.now();
@@ -49,11 +51,11 @@ public class Acesso {
         this.ip = ip;
     }
 
-    public String getAcao() {
+    public TipoAcaoSuspeita getAcao() {
         return acao;
     }
 
-    public void setAcao(String acao) {
+    public void setAcao(TipoAcaoSuspeita acao) {
         this.acao = acao;
     }
 
