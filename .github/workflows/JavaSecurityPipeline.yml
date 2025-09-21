@@ -57,8 +57,14 @@ jobs:
           curl -L https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip -o dc.zip
           unzip dc.zip -d dc
 
-      - name: Run Dependency-Check (SCA)
-        run: ./dc/dependency-check/bin/dependency-check.sh --project "MeuApp" --scan . --format "ALL" --out ./dc-report
+      - name: Run Dependency-Check Offline (SCA)
+        run: ./dc/dependency-check/bin/dependency-check.sh \
+              --project "MeuApp" \
+              --scan . \
+              --format "ALL" \
+              --out ./dc-report \
+              --cveValidForHours 168 \
+              --disableAssembly
 
       - name: Upload Dependency-Check Report
         uses: actions/upload-artifact@v4
@@ -80,7 +86,7 @@ jobs:
 
       - name: Run App in Background
         run: mvn spring-boot:run &
-      
+
       - name: Wait for App Startup
         run: sleep 30
 
