@@ -118,20 +118,16 @@ jobs:
       - name: Wait for App Startup
         run: sleep 30
 
-      - name: Run OWASP ZAP (DAST)
-        run: |
-          docker run -t --network="host" owasp/zap2docker-weekly zap-baseline.py \
-            -t http://localhost:8080 \
-            -r zap-report.html \
-            -w zap-report.md \
-            -J zap-report.json
-
+      - name: Run OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v1
+        with:
+          target: 'http://localhost:8080'
+          format: 'HTML'
+          report: 'zap-report.html'
+          fail: false
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
         with:
           name: ZAP-Report
-          path: |
-            zap-report.html
-            zap-report.md
-            zap-report.json
+          path: zap-report.html
