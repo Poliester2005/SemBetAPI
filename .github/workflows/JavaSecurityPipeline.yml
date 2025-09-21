@@ -120,11 +120,12 @@ jobs:
 
       - name: Run OWASP ZAP (DAST)
         run: |
-          docker run -t --network="host" owasp/zap2docker-stable zap-baseline.py \
+          docker run -t --network="host" owasp/zap2docker-weekly zap-baseline.py \
             -t http://localhost:8080 \
             -r zap-report.html \
             -w zap-report.md \
             -J zap-report.json
+
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
