@@ -4,6 +4,7 @@ API RESTful desenvolvida em Java com Spring Boot 3 para gerenciar usuários e ac
 
 ---
 
+
 ## 🧱 Arquitetura
 
 - 🔁 **SOA Modular**: serviços desacoplados, reutilizáveis e independentes.
