@@ -1,5 +1,6 @@
 name: Java Security Pipeline
 
+
 on:
   push:
     branches: [ "main" ]
